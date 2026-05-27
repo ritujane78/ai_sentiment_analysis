@@ -32,6 +32,17 @@ function App() {
     setFeedbackList([...feedbackList, response.data]);
     setFeedback('');
   }
+  
+  const getSentimentColor = (sentiment) => {
+    switch (sentiment) {
+      case "POSITIVE":
+        return "bg-green-100";
+      case "NEGATIVE":
+        return "bg-red-100";
+      default:
+        return "bg-gray-100";
+    }
+  };
 
   return (
     <>
@@ -63,7 +74,9 @@ function App() {
           <tr key={item.id}>
             <td>{item.content}</td>
             <td>{item.sentimentScore}</td>
-            <td>{item.sentiment}</td>
+            <td className={`${getSentimentColor(item.sentiment)}`}>
+                  {item.sentiment}
+                </td>
           </tr>
           ))}
         </tbody>
