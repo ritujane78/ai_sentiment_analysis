@@ -1,18 +1,49 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import axios from 'axios';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [feedback, setFeedback] = useState('');
+  const [feedbackList, setFeedbackList] = useState([]);
+
+  useEffect(() => {
+    // Fetch feedback history from backend
+    axios.get("http://localhost:8080/api/feedback")
+    .then(response => {
+      setFeedbackList(response.data);
+    })
+    .catch(error => {
+      console.error("Error fetching feedback history:", error);
+    });
+  }, []);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await axios.post("http://localhost:8080/api/feedback", feedback, {
+      headers: {
+        "Content-Type": "text/plain"
+      }
+    });
+    setFeedbackList([...feedbackList, response.data]);
+    setFeedback('');
+  }
 
   return (
     <>
     <div className="container mx-auto p-4">
       <h1 className='text-2xl font-bold mb-4'>Sentiment Feedback Analyzer</h1>
-      <form className='mb-4'> 
-        <textarea className='w-full p-2 border rounded' placeholder='Enter the feedback here...' rows="4"></textarea>
+      <form 
+      onSubmit={handleSubmit}
+      className='mb-4'> 
+        <textarea 
+        value={feedback}
+        onChange={(e) => setFeedback(e.target.value)}
+        className='w-full p-2 border rounded' placeholder='Enter the feedback here...' rows="4"></textarea>
         <button type='submit' 
         className='px-4 py-4 my-5 bg-blue-500 text-white rounded'>
         Submit Feedback
@@ -28,11 +59,13 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Feedback Feedback Feedback</td>
-            <td>0.8</td>
-            <td>Positive</td>
+          {feedbackList.map((item) => (
+          <tr key={item.id}>
+            <td>{item.content}</td>
+            <td>{item.sentimentScore}</td>
+            <td>{item.sentiment}</td>
           </tr>
+          ))}
         </tbody>
       </table>
     </div>
