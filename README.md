@@ -1,7 +1,7 @@
 # AI Sentiment Analysis
 
 An AI-powered Sentiment Analysis application built with **React** for the frontend and **Spring Boot + Spring AI** for the backend.  
-The application analyzes customer/product feedback using **OpenAI GPT-4o-nano** and returns:
+The application analyzes customer/product feedback using **OpenAI GPT-4o-mini** and returns:
 
 - Sentiment Type (Positive, Negative, Neutral)
 - Sentiment Score
@@ -19,7 +19,7 @@ The application analyzes customer/product feedback using **OpenAI GPT-4o-nano** 
 ## Backend
 - Spring Boot
 - Spring AI
-- OpenAI Chat Model (`gpt-4o-nano`)
+- OpenAI Chat Model (`gpt-4o-mini`)
 - Maven
 
 ---
@@ -39,7 +39,7 @@ The AI understands the context, tone, and meaning of the feedback and returns:
 
 # How AI is Used
 
-The backend uses **Spring AI** to connect with OpenAI's chat model (`gpt-4o-nano`).
+The backend uses **Spring AI** to connect with OpenAI's chat model (`gpt-4o-mini`).
 
 Instead of relying on traditional keyword-based sentiment analysis, the application uses an LLM (Large Language Model) to understand:
 - Emotions
@@ -79,7 +79,7 @@ Spring Boot REST API
       ↓
 Spring AI
       ↓
-OpenAI GPT-4o-nano
+OpenAI GPT-4o-mini
       ↓
 Sentiment Result Returned
 ```

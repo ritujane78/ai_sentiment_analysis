@@ -56,7 +56,7 @@ function App() {
         onChange={(e) => setFeedback(e.target.value)}
         className='w-full p-2 border rounded' placeholder='Enter the feedback here...' rows="4"></textarea>
         <button type='submit' 
-        className='px-4 py-4 my-5 bg-blue-500 text-white rounded'>
+        className='px-4 py-4 my-5 bg-blue-500 text-white rounded cursor-pointer'>
         Submit Feedback
         </button>
       </form>
