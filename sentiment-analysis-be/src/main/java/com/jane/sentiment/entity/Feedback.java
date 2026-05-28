@@ -2,7 +2,6 @@ package com.jane.sentiment.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDateTime;
 
